@@ -15,7 +15,7 @@ const userProfile = document.getElementById("user-profile");
 
 console.log(authCode);
 
-tiger.get('backURL', {
+tiger.post('backURL', {
     authCode: authCode,
 })
 
