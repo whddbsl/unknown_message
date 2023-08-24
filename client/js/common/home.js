@@ -9,15 +9,23 @@ const REDIRECT_URI = "http://localhost:5500/views/home.html";
 
 // Redirect URI에서 인가 코드 추출
 const urlParams = new URLSearchParams(window.location.search);
-const authCode = urlParams.get("code");
+const authCode =
+    {authCode : JSON.stringify(urlParams.get("code"))}
+
 
 const userProfile = document.getElementById("user-profile");
 
 console.log(authCode);
 
 tiger.post('backURL', {
-    authCode: authCode,
+    authCode : authCode,
+}).then(response => response.json())
+.then(data => {
+  console.log(data);
 })
+.catch(error => {
+  console.error("에러 발생: ", error);
+});
 
 // 카카오 액세스 토큰(인가 코드) 요청
 if (authCode) {
